@@ -1,0 +1,14 @@
+{
+	"name": "RestResource",
+	"properties": {
+		"description": "Connection to your REST/HTTP",
+		"linkedServiceName": {
+			"referenceName": "RestServiceCryptoCompare",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"schema": []
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

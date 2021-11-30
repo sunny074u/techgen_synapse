@@ -1,0 +1,110 @@
+{
+	"name": "PL_Copy_CryptoCompare_Data",
+	"properties": {
+		"activities": [
+			{
+				"name": "CopyData",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "GetBearerToken",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 1,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "RestSource",
+						"httpRequestTimeout": "7.00:00:00",
+						"requestInterval": "00.00:00:00.010",
+						"requestMethod": "POST",
+						"additionalHeaders": {
+							"Authorization": {
+								"value": "@concat('Bearer ',activity('GetBearerToken').output.access_token)",
+								"type": "Expression"
+							}
+						}
+					},
+					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "RestResource",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "SinkDataset",
+						"type": "DatasetReference",
+						"parameters": {
+							"Container": {
+								"value": "@pipeline().parameters.SinkContainer",
+								"type": "Expression"
+							},
+							"Directory": {
+								"value": "@pipeline().parameters.SinkDirectory",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			},
+			{
+				"name": "GetBearerToken",
+				"description": "Use this Web activity to get bearer token",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://login.microsoftonline.com/microsoft.onmicrosoft.com/oauth2/token",
+					"connectVia": {
+						"referenceName": "AutoResolveIntegrationRuntime",
+						"type": "IntegrationRuntimeReference"
+					},
+					"method": "GET",
+					"headers": {
+						"Content-Type": "application/x-www-form-urlencoded"
+					},
+					"body": "grant_type=client_credentials&client_id=<service principal ID>&resource=<your resource>&client_secret=<service principal key>"
+				}
+			}
+		],
+		"parameters": {
+			"SinkContainer": {
+				"type": "string"
+			},
+			"SinkDirectory": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-11-27T19:22:27Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}
