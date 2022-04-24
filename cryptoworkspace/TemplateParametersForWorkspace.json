@@ -1,0 +1,45 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"workspaceName": {
+			"value": "cryptoworkspace"
+		},
+		"AzureBlobStorage1_connectionString": {
+			"value": ""
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"value": ""
+		},
+		"cryptoworkspace-WorkspaceDefaultSqlServer_connectionString": {
+			"value": ""
+		},
+		"linkedService1_accountKey": {
+			"value": ""
+		},
+		"linkedService2_accountKey": {
+			"value": ""
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://cryptoadls.dfs.core.windows.net/"
+		},
+		"Omenics_properties_typeProperties_url": {
+			"value": "https://omenics.com/api/v1"
+		},
+		"RestService1_properties_typeProperties_url": {
+			"value": "https://min-api.cryptocompare.com/data/v2/histohour?fsym=BTC&tsym=USD&limit=10"
+		},
+		"RestServiceCryptoCompare_properties_typeProperties_url": {
+			"value": "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC&tsyms=USD,EUR"
+		},
+		"cryptoworkspace-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"value": "https://cryptoadls.dfs.core.windows.net"
+		},
+		"linkedService1_properties_typeProperties_url": {
+			"value": "https://cryptoadls.dfs.core.windows.net/"
+		},
+		"linkedService2_properties_typeProperties_url": {
+			"value": "https://cryptoadls.dfs.core.windows.net/"
+		}
+	}
+}
