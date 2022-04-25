@@ -1,11 +1,10 @@
 {
 	"name": "RestServiceCryptoCompare",
-	"type": "Microsoft.Synapse/workspaces/linkedservices",
 	"properties": {
 		"annotations": [],
 		"type": "RestService",
 		"typeProperties": {
-			"url": "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC&tsyms=USD,EUR",
+			"url": "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC&tsyms=USD",
 			"enableServerCertificateValidation": true,
 			"authenticationType": "Anonymous"
 		},
@@ -13,5 +12,6 @@
 			"referenceName": "AutoResolveIntegrationRuntime",
 			"type": "IntegrationRuntimeReference"
 		}
-	}
+	},
+	"type": "Microsoft.Synapse/workspaces/linkedservices"
 }
